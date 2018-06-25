@@ -14,7 +14,8 @@ public class Ints {
     }
 
     public static int fromByteArray(byte[] bytes) {
-        return fromBytes(bytes[0], bytes[1], bytes[2], bytes[3]);
+        //return fromBytes(bytes[0], bytes[1], bytes[2], bytes[3]);
+        return bytes[0];
     }
 
     private static int fromBytes(byte b1, byte b2, byte b3, byte b4) {
