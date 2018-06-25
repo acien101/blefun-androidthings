@@ -65,6 +65,7 @@ public class ScanActivity extends AppCompatActivity {
 
             if (!results.isEmpty()) {
                 ScanResult result = results.get(0);
+
                 startInteractActivity(result.getDevice());
             }
         }
@@ -172,7 +173,7 @@ public class ScanActivity extends AppCompatActivity {
         mScanning = true;
 
         ScanSettings settings = new ScanSettings.Builder()
-                .setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
+                .setScanMode(ScanSettings.SCAN_MODE_BALANCED)
                 .setReportDelay(1000)
                 .build();
         List<ScanFilter> filters = new ArrayList<>();
@@ -197,6 +198,8 @@ public class ScanActivity extends AppCompatActivity {
     }
 
     private void startInteractActivity(BluetoothDevice device) {
+        Log.i("BLE DEVICE INFO:", device.toString());
+
         Intent intent = new Intent(this, InteractActivity.class);
         intent.putExtra(InteractActivity.EXTRA_DEVICE_ADDRESS, device.getAddress());
         startActivity(intent);
