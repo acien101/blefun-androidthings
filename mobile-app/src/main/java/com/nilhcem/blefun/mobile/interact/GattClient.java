@@ -29,8 +29,6 @@ public class GattClient {
     private static final String TAG = GattClient.class.getSimpleName();
 
     public interface OnCounterReadListener {
-        void onCounterRead(int value);
-
         void onConnected(boolean success);
     }
 
@@ -99,7 +97,7 @@ public class GattClient {
             if (CHARACTERISTIC_COUNTER_UUID.equals(characteristic.getUuid())) {
                 byte[] data = characteristic.getValue();
                 int value = Ints.fromByteArray(data);
-                mListener.onCounterRead(value);
+                //mListener.onCounterRead(value);
             }
         }
     };
@@ -157,11 +155,11 @@ public class GattClient {
         mContext.unregisterReceiver(mBluetoothReceiver);
     }
 
-    public void writeInteractor() {
+    public void writeInteractor(int progress) {
         BluetoothGattCharacteristic interactor = mBluetoothGatt
                 .getService(SERVICE_UUID)
                 .getCharacteristic(CHARACTERISTIC_INTERACTOR_UUID);
-        interactor.setValue("!");
+        interactor.setValue(Integer.toString(progress));
         mBluetoothGatt.writeCharacteristic(interactor);
     }
 
